@@ -1,0 +1,275 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: rgb(233, 238, 242);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+#back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 52px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
+  z-index: 1000;
+}
+
+#back-arrow {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  cursor: pointer;
+}
+
+#back-arrow:hover {
+  background-color: #444746;
+  color: #fff;
+}
+
+
+.signinpage {
+  width: 50%;
+  min-width: 320px;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 36px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+
+
+.googlelogo {
+  margin-bottom: 20px;
+}
+
+.googleicon {
+  font-size: 52px;
+  color: #444;
+}
+
+
+.signinst1 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.signinst2 {
+  font-size: 15px;
+  color: #555;
+}
+
+
+.block1 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.signinst,
+.signin-info {
+  width: 45%;
+  min-width: 250px;
+}
+
+
+.signininput {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+
+.signininput .inputbox {
+  width: 100%;
+  padding: 12px 10px;
+  font-size: 14px;
+  border: 1px solid rgb(85, 85, 85);
+  border-radius: 6px;
+}
+
+.inputbox:focus {
+  outline: none;
+  border-color: #1a73e8;
+}
+
+
+.invalid-feedback {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #d93025;
+  line-height: 1.4;
+}
+
+
+.was-validated .inputbox:valid {
+  border-color: #1a73e8;
+}
+
+
+.was-validated .inputbox:invalid {
+  border-color: #d93025;
+}
+
+
+.file-upload {
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+
+.block2 {
+  margin-top: 28px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.createaccount {
+  color: rgb(27, 103, 225);
+  font-weight: 600;
+  font-size: 14px;
+  margin-right: 25px;
+  text-decoration: none;
+}
+
+.next {
+  width: 76px;
+  height: 38px;
+  border-radius: 20px;
+  background-color: #0b57d0;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.next:hover {
+  background-color: #0842a0;
+}
+
+
+.divider {
+  margin: 26px 0;
+  text-align: center;
+  font-size: 13px;
+  color: #777;
+}
+
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid #ccc;
+  padding: 11px;
+  border-radius: 22px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+.google-btn img {
+  width: 18px;
+}
+
+
+.alert {
+  width: 100%;
+  max-width: 420px;
+  margin: 10px auto 20px auto;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: fixed !important;
+  top: 40px;
+}
+.alert-danger {
+  background: #fde8e8;
+  color: #b91c1c;
+  border: 1px solid #f5c2c2;
+}
+.alert-danger::before {
+  content: "⚠️";
+  font-size: 16px;
+}
+
+
+@media (max-width: 1024px) {
+  .signinpage {
+    width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    align-items: flex-start;
+    padding-top: 90px;
+  }
+
+  .signinpage {
+    width: 90%;
+  }
+
+  .block1 {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .signinst,
+  .signin-info {
+    width: 100%;
+  }
+
+  .block2 {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  #back {
+    padding-left: 15px;
+  }
+
+  .signinpage {
+    width: 92%;
+    padding: 18px;
+    border-radius: 12px;
+  }
+
+  .signinst1 {
+    font-size: 22px;
+  }
+
+  .signinst2 {
+    font-size: 13px;
+  }
+
+  .next {
+    width: 68px;
+    height: 34px;
+    font-size: 12px;
+  }
+}

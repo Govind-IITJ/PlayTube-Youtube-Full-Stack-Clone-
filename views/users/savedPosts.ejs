@@ -1,0 +1,65 @@
+<% layout("/layouts/boilerplate") %>
+
+<div id="body">
+
+  <div id="sidebar">
+    <%- include("../includes/sidebar.ejs") %>
+  </div>
+
+  <% if (posts.length === 0) { %>
+    <div id="search-nofound">
+      <div id="search-nofound-image"></div>
+      <div id="search-nofound-1">No saved posts yet</div>
+      <div id="search-nofound-2">
+        <p>Save community posts to read later.</p>
+      </div>
+    </div>
+  <% } %>
+
+  <div id="savedPosts">
+
+    <% posts.forEach(post => { %>
+      <div class="saved-post-card">
+        <div class="saved-post-header">
+          <a href="/users/<%=post.creator._id%>">
+            <div class="post-user">
+            <div
+              class="post-avatar"
+              style="background-image:url('<%= post.creator.profilePic %>')"
+            ></div>
+
+            <div class="post-user-info">
+              <div class="post-username"><%= post.creator.username %></div>
+              <div class="post-date">
+                <%= new Date(post.createdAt).toLocaleDateString() %>
+              </div>
+            </div>
+          </div>
+          </a>
+
+          <form
+            action="/users/savedposts/<%= post._id %>?_method=PUT"
+            method="POST"
+          >
+            <button class="remove-post-btn" type="submit">Remove</button>
+          </form>
+        </div>
+
+        <div class="saved-post-content">
+          <p><%= post.content %></p>
+        </div>
+
+        <% if (post.image) { %>
+          <div
+            class="saved-post-image"
+            style="background-image:url('<%= post.image %>')"
+          ></div>
+        <% } %>
+
+      </div>
+    <% }) %>
+
+  </div>
+</div>
+
+<script src="/js/sidebar.js"></script>

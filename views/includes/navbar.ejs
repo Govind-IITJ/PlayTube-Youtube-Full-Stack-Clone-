@@ -1,0 +1,153 @@
+<header>
+  <div id="header">
+    <div id="logo">
+      <div>
+        <i id="bar" class="fas fa-bars"></i>
+      </div>
+      <a href="\videos" id="logobox">
+        <div id="logoimage" style="background-image: url('/images/logo.png')"></div>
+      </a>
+    </div>
+
+    <div id="search">
+      <!-- Search bar goes here -->
+      <div id="searchbar_box">
+        <input inputmode="search" enterkeyhint="search" autocomplete="off" id="searchbar" type="text" placeholder="Search..." value="<%= query || '' %>" />
+      </div>
+      <a href="javascript:void(0)">
+        <div id="searchicon1">
+          <i id="icon" class="fa-solid fa-magnifying-glass"></i>
+        </div>
+      </a>
+      <div id="micebox">
+        <div id="miceicon">
+          <i class="fa-solid fa-microphone"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="listen">
+      <div id="listen-int">Listening...</div>
+      <div id="listen-box">
+        <i class="fa-solid fa-microphone fa-beat" style="color: #ff0000"></i>
+      </div>
+    </div>
+
+    <div id="profile">
+      <!-- Upload -->
+      <a style="position: relative;" href="">
+        <div id="create">
+          <div id="create_icon_box">
+            <i id="create_icon" class="fa-thin fa-plus"></i>
+          </div>
+          <div id="create_content">Upload</div>
+        </div>
+      </a>
+
+      <!-- Upload Dropdown -->
+      <div id="upload-dropdown">
+        <% if (currentUser) { %>
+        <a href="/upload/video" class="upload-item">
+          <i class="bi bi-camera-video-fill"></i>
+          <span>Upload Video</span>
+        </a>
+
+        <a href="/upload/short" class="upload-item">
+          <i class="bi bi-lightning-fill"></i>
+          <span>Create Short</span>
+        </a>
+
+        <a href="/upload/post" class="upload-item">
+          <i class="bi bi-chat-square-text-fill"></i>
+          <span>Community Post</span>
+        </a>
+        <% } else { %>
+        <a href="/login" class="upload-item upload-guest" data-action="video">
+          <i class="bi bi-camera-video-fill"></i>
+          <span>Upload Video</span>
+        </a>
+
+        <a href="/login" class="upload-item upload-guest" data-action="short">
+          <i class="bi bi-lightning-fill"></i>
+          <span>Create Short</span>
+        </a>
+
+        <a href="/login" class="upload-item upload-guest" data-action="post">
+          <i class="bi bi-chat-square-text-fill"></i>
+          <span>Community Post</span>
+        </a>
+        <% } %>
+      </div>
+
+      <!-- Notification -->
+      <div id="notification">
+        <i id="notification-icon" class="fa-regular fa-bell"></i>
+      </div>
+
+      <!-- Profile Icon -->
+      <div id="userid">
+
+        <% if (currentUser) { %>
+        <div style="
+      background-image: url('<%= currentUser.profilePic %>');
+      background-size: cover;
+      background-position: center;
+      width: 32px;
+      height: 32px;
+      border-radius:10%;
+      border: 2px solid black;
+    ">
+        </div>
+        <% } else { %>
+        <i class="fa-solid fa-user"></i>
+        <% } %>
+
+        <div id="profile-menu">
+          <% if (!currentUser) { %>
+          <!-- NOT LOGGED IN -->
+          <a href="/login" class="profile-link">Sign in</a>
+          <a href="/signup" class="profile-link">Sign up</a>
+
+          <% } else { %>
+          <!-- LOGGED IN -->
+          <div onclick="window.location.href='/users/<%= currentUser._id %>'" class="profile-user">
+            <strong><%= currentUser.username %></strong>
+          </div>
+
+          <form action="/logout" method="GET">
+            <button type="submit" class="profile-logout">
+              Logout
+            </button>
+          </form>
+          <% } %>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Screen -->
+    <div id="notification-screen">
+      <div class="notification-box">
+        <i class="fa-regular fa-bell-slash"></i>
+        <p>No notifications</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const uploadAnchor = document.querySelector('a[href=""]');
+  const uploadDropdown = document.getElementById("upload-dropdown");
+
+  uploadAnchor.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    uploadDropdown.style.display =
+      uploadDropdown.style.display === "flex" ? "none" : "flex";
+  });
+
+  document.addEventListener("click", () => {
+    uploadDropdown.style.display = "none";
+  });
+</script>

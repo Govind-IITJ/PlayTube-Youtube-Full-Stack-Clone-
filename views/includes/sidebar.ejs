@@ -1,0 +1,266 @@
+  <a href="\videos"">
+    <div class=" sidetab" id="home">
+    <div class="sidebaricon" id="homeicon">
+      <i class="fa-solid fa-house"></i>
+    </div>
+    <div class="sidebarname" id="homename">Home</div>
+    </div>
+  </a>
+
+  <a href="\shorts">
+    <div class="sidetab" id="shorts">
+      <div class="sidebaricon" id="shortsicon">
+        <i class="fa-solid fa-bolt"></i>
+      </div>
+      <div class="sidebarname" id="shortsname">Shorts</div>
+    </div>
+  </a>
+
+  <!-- Playtube Main Channel -->
+  <a href="/users/6977676d00d677cd5929e69c">
+    <div class="sidetab">
+      <div class="sidebaricon">
+        <i class="bi bi-play-circle-fill"></i>
+      </div>
+      <div class="sidebarname">Playtube</div>
+    </div>
+  </a>
+
+  <br \ />
+  <hr \ />
+  <br \ />
+
+  <a href="\videos">
+    <div class="sidetab" id="you">
+      <pre>You  ></pre>
+    </div>
+  </a>
+
+  <% if (currentUser) { %>
+  <a href="/users/savedvideos">
+    <div class="sidetab" id="savedvideos">
+      <div class="sidebaricon" id="savedvideosicon">
+        <i class="bi bi-play-btn-fill"></i>
+      </div>
+      <div class="sidebarname">Saved Videos</div>
+    </div>
+  </a>
+  <% } else { %>
+  <a href="/login" class="sidebar-guest" data-action="saved-videos">
+    <div class="sidetab">
+      <div class="sidebaricon">
+        <i class="bi bi-play-btn-fill"></i>
+      </div>
+      <div class="sidebarname">Saved Videos</div>
+    </div>
+  </a>
+  <% } %>
+
+  <% if (currentUser) { %>
+  <a href="/users/savedposts">
+    <div class="sidetab" id="savedposts">
+      <div class="sidebaricon" id="savedpostsicon">
+        <i class="bi bi-journal-bookmark-fill"></i>
+      </div>
+      <div class="sidebarname" id="savedpostsname">Saved Posts</div>
+    </div>
+  </a>
+  <% } else { %>
+  <a href="/login" class="sidebar-guest" data-action="saved-posts">
+    <div class="sidetab" id="savedposts">
+      <div class="sidebaricon" id="savedpostsicon">
+        <i class="bi bi-journal-bookmark-fill"></i>
+      </div>
+      <div class="sidebarname" id="savedpostsname">Saved Posts</div>
+    </div>
+  </a>
+  <% } %>
+
+
+  <% if (currentUser) { %>
+  <a href="/users/followings">
+    <div class="sidetab" id="subscription">
+      <div class="sidebaricon" id="subicon">
+        <i class="fa-solid fa-bookmark"></i>
+      </div>
+      <div class="sidebarname" id="subname">Followings</div>
+    </div>
+  </a>
+  <% } else { %>
+  <a href="/login" class="sidebar-guest" data-action="followings">
+    <div class="sidetab" id="subscription">
+      <div class="sidebaricon" id="subicon">
+        <i class="fa-solid fa-bookmark"></i>
+      </div>
+      <div class="sidebarname" id="subname">Followings</div>
+    </div>
+  </a>
+  <% } %>
+
+  <br \ />
+  <hr \ />
+  <br \ />
+
+  <!-- Upload Section -->
+
+  <a href="">
+    <div class="sidetab" id="Subscriptions">
+      <pre>Create ></pre>
+    </div>
+  </a>
+
+  <% if (currentUser) { %>
+  <a href="/upload/video">
+    <div class="sidetab" id="upload-video">
+      <div class="sidebaricon">
+        <i class="bi bi-camera-video-fill"></i>
+      </div>
+      <div class="sidebarname">Upload Video</div>
+    </div>
+  </a>
+  <% } else { %>
+  <a href="/login" class="sidebar-guest" data-action="uploadvideo">
+    <div class="sidetab" id="upload-video">
+      <div class="sidebaricon">
+        <i class="bi bi-camera-video-fill"></i>
+      </div>
+      <div class="sidebarname">Upload Video</div>
+    </div>
+  </a>
+  <% } %>
+
+  <% if (currentUser) { %>
+  <a href="/upload/short">
+    <div class="sidetab" id="upload-short">
+      <div class="sidebaricon">
+        <i class="bi bi-lightning-fill"></i>
+      </div>
+      <div class="sidebarname">Create Short</div>
+    </div>
+  </a>
+
+  <% } else { %>
+  <a href="/login" class="sidebar-guest" data-action="uploadshort">
+    <div class="sidetab" id="upload-short">
+      <div class="sidebaricon">
+        <i class="bi bi-lightning-fill"></i>
+      </div>
+      <div class="sidebarname">Create Short</div>
+    </div>
+  </a>
+  <% } %>
+
+  <% if (currentUser) { %>
+  <a href="/upload/post">
+    <div class="sidetab" id="upload-post">
+      <div class="sidebaricon">
+        <i class="bi bi-chat-square-text-fill"></i>
+      </div>
+      <div class="sidebarname">Create Post</div>
+    </div>
+  </a>
+  <% } else { %>
+  <a href="/login" class="sidebar-guest" data-action="uploadpost">
+    <div class="sidetab" id="upload-post">
+      <div class="sidebaricon">
+        <i class="bi bi-chat-square-text-fill"></i>
+      </div>
+      <div class="sidebarname">Create Post</div>
+    </div>
+  </a>
+  <% } %>
+
+  <br \ />
+  <hr \ />
+  <br \ />
+
+  <!-- ===== ACCOUNT SECTION ===== -->
+  <a href="">
+    <div class="sidetab" id="Subscriptions">
+      <pre>Accounts ></pre>
+    </div>
+  </a>
+
+  <% if (!currentUser) { %>
+
+  <!-- SIGN IN -->
+  <a href="/login">
+    <div class="sidetab" id="signin">
+      <div class="sidebaricon">
+        <i class="bi bi-box-arrow-in-right"></i>
+      </div>
+      <div class="sidebarname">Sign In</div>
+    </div>
+  </a>
+
+  <!-- SIGN UP -->
+  <a href="/signup">
+    <div class="sidetab" id="signup">
+      <div class="sidebaricon">
+        <i class="bi bi-person-plus-fill"></i>
+      </div>
+      <div class="sidebarname">Sign Up</div>
+    </div>
+  </a>
+
+  <% } else { %>
+
+  <!-- VISIT ACCOUNT -->
+  <a href="/users/<%= currentUser._id %>">
+    <div class="sidetab" id="visit-account">
+      <div class="sidebaricon">
+        <i class="bi bi-person-circle"></i>
+      </div>
+      <div class="sidebarname">Visit Account</div>
+    </div>
+  </a>
+
+  <!-- LOGOUT -->
+  <a href="/logout">
+    <div class="sidetab" id="logout">
+      <div class="sidebaricon">
+        <i class="bi bi-box-arrow-right"></i>
+      </div>
+      <div class="sidebarname">Logout</div>
+    </div>
+  </a>
+
+  <% } %>
+
+  <br \ />
+  <hr \ />
+  <br \ />
+
+  <a href="/videos">
+    <div class="sidetab" id="you">
+      <pre>Connect  ></pre>
+    </div>
+  </a>
+
+  <!-- Social Links -->
+  <a href="https://github.com/Govind-IITJ" target="_blank">
+    <div class="sidetab">
+      <div class="sidebaricon">
+        <i class="bi bi-github"></i>
+      </div>
+      <div class="sidebarname">GitHub</div>
+    </div>
+  </a>
+
+  <a href="https://www.instagram.com/govind_iitjmu" target="_blank">
+    <div class="sidetab">
+      <div class="sidebaricon">
+        <i class="bi bi-instagram"></i>
+      </div>
+      <div class="sidebarname">Instagram</div>
+    </div>
+  </a>
+
+  <a href="https://www.linkedin.com/in/govind-prajapat-070432340/" target="_blank">
+    <div class="sidetab">
+      <div class="sidebaricon">
+        <i class="bi bi-linkedin"></i>
+      </div>
+      <div class="sidebarname">LinkedIn</div>
+    </div>
+  </a>

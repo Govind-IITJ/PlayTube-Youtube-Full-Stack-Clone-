@@ -1,0 +1,78 @@
+<% layout("/layouts/boilerplate") %>
+
+<div id="body">
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <%- include("../includes/sidebar.ejs") %>
+  </div>
+
+  <% if (videos.length === 0) { %>
+  <div id="search-nofound">
+    <div id="search-nofound-image"></div>
+    <div id="search-nofound-1">No saved videos yet</div>
+    <div id="search-nofound-2">
+      <p>Save videos to watch later.</p>
+    </div>
+  </div>
+
+  <% } %>
+
+  <div id="search-videosearchcontent">
+
+    <h3 style="margin-bottom: 15px;
+    font-size: 25px;
+    margin-left: 22px;">Saved Videos</h3>
+
+    <% videos.forEach(video => { %>
+
+    <div class="search-videosearchbox" style="cursor: pointer;">
+
+      <!-- Thumbnail -->
+      <div class="search-videosearchthumbnail" style="background-image: url('<%= video.thumbnail %>')" onclick="window.location.href='/video/<%= video._id %>'"></div>
+
+      <!-- Info -->
+      <div class="search-hiddeninfo">
+
+        <!-- Creator icon -->
+        <div class="search-hiddenicon" style="background-image: url('<%= video.creator.profilePic; %>')"></div>
+
+        <div class="search-videosearchinfo">
+
+          <div class="search-videosearchname">
+            <%= video.title %>
+          </div>
+
+          <div class="search-searchvideoviews">
+            Posted on •
+            <%= new Date(video.date).toLocaleDateString() %>
+          </div>
+
+          <div class="search-searchchannel">
+
+            <div class="search-searchchannelicon" style="background-image: url('<%= video.creator.profilePic; %>')"></div>
+
+            <div class="search-searchchannelname">
+              <%= video.creator.username %>
+            </div>
+
+            <div class="three-dots-menu">
+              <form action="/users/savedvideos/<%= video._id %>?_method=PUT" method="POST">
+                <button class="video-remove-btn" type="submit">
+                  Remove
+                </button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <% }) %>
+
+  </div>
+</div>
+
+<script src="/js/sidebar.js"></script>

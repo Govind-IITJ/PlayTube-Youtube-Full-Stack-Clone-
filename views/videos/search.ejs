@@ -1,0 +1,48 @@
+<% layout("/layouts/boilerplate") %>
+
+<div id="body">
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <%- include("../includes/sidebar.ejs") %>
+  </div>
+
+  <% if (videos.length === 0) { %>
+  <div id="search-nofound">
+    <div id="search-nofound-image"></div>
+    <div id="search-nofound-1">No results found</div>
+    <div id="search-nofound-2">
+      <p>Try different keywords or remove</p>
+      <p>search filters</p>
+    </div>
+  </div>
+  <% } %>
+
+  <div id="search-videosearchcontent">
+    <% videos.forEach(video => { %>
+    <div class="search-videosearchbox" style="cursor: pointer;">
+      <div class="search-videosearchthumbnail" onclick="window.location.href='/video/<%= video._id %>'" style="background-image: url('<%= video.thumbnail %>')"></div>
+      <div class="search-hiddeninfo">
+        <div class="search-hiddenicon" onclick="window.location.href='/users/<%= video.creator._id %>'" style="background-image: url('<%= video.creator.profilePic %>')"></div>
+        <div class="search-videosearchinfo">
+          <div onclick="window.location.href='/video/<%= video._id %>'" class="search-videosearchname">
+          <%= video.title %>
+        </div>
+        <div class="search-searchvideoviews">
+          <%= video.category %>
+          <%= new Date(video.date).toLocaleDateString() %>
+        </div>
+        <div class="search-searchchannel">
+          <div class="search-searchchannelicon" style="background-image: url('<%= video.creator.profilePic %>')"></div>
+          <div class="search-searchchannelname">
+            <%= video.creator.username %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }) %>
+</div>
+</div>
+
+<script src="/js/sidebar.js"></script>

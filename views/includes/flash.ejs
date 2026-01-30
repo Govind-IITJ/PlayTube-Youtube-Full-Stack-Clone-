@@ -1,0 +1,37 @@
+<% if (success && success.length) { %>
+  <div class="flash flash-success">
+    <span class="flash-text"><%= success[0] %></span>
+    <button class="flash-close" aria-label="Close">×</button>
+  </div>
+<% } %>
+
+<% if (error && error.length) { %>
+  <div class="flash flash-error">
+    <% error.forEach(msg => { %>
+      <span class="flash-text"><%= msg %></span><br>
+    <% }) %>
+    <button class="flash-close" aria-label="Close">×</button>
+  </div>
+<% } %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const flashes = document.querySelectorAll(".flash");
+
+    flashes.forEach(flash => {
+      const closeBtn = flash.querySelector(".flash-close");
+
+      closeBtn?.addEventListener("click", () => {
+        flash.classList.add("flash-hide");
+        setTimeout(() => flash.remove(), 300);
+      });
+
+      setTimeout(() => {
+        if (flash.isConnected) {
+          flash.classList.add("flash-hide");
+          setTimeout(() => flash.remove(), 300);
+        }
+      }, 4000);
+    });
+  });
+</script>

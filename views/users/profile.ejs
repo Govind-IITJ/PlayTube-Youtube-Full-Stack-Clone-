@@ -1,0 +1,273 @@
+<% layout("/layouts/boilerplate") %>
+
+<div id="body">
+  <div id="sidebar">
+    <%- include("../includes/sidebar.ejs") %>
+  </div>
+
+  <div id="userdisplay">
+    <div class="user-profile">
+
+      <div>
+        <!-- COVER -->
+        <div class="user-banner" style="background-image: url('<%= user.backgroundImage %>')"></div>
+
+        <!-- PROFILE HEADER -->
+        <div class="user-header">
+
+          <div class="user-avatar" style="background-image: url('<%= user.profilePic %>')"></div>
+
+          <div class="user-info">
+            <h2><%= user.username %></h2>
+
+            <div class="user-stats">
+              <span><%= videos.length %> Videos</span>
+              <span><%= posts.length %> Posts</span>
+              <span><%= user.followings.length %> Following</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PROFILE TABS -->
+        <div class="user-tabs">
+          <button class="tab-btn active" data-tab="tab-videos" data-hash="videos">Videos</button>
+          <button class="tab-btn" data-tab="tab-shorts" data-hash="shorts">Shorts</button>
+          <button class="tab-btn" data-tab="tab-posts" data-hash="posts">Community</button>
+          <button class="tab-btn" data-tab="tab-about" data-hash="about">About</button>
+        </div>
+
+        <!-- TAB CONTENT -->
+        <div class="tab-content">
+
+          <!-- VIDEOS -->
+          <div class="tab-panel active" id="tab-videos">
+            <% if (videos.length === 0) { %>
+            <p class="empty-text">No videos uploaded</p>
+            <% } %>
+
+            <div class="grid">
+              <% videos.forEach(video => { %>
+              <div class="card-wrapper">
+
+                <a href="/video/<%= video._id %>" class="card">
+                  <div class="card-thumb" style="background-image: url('<%= video.thumbnail %>')"></div>
+                  <div class="card-footer">
+                    <div class="card-title"><%= video.title %></div>
+                  </div>
+                </a>
+
+                <div class="card-menu">
+                  <button class="threedots" type="button">⋮</button>
+                  <div class="card-dropdown">
+                    <form action="/videos/<%= video._id %>?_method=DELETE" method="POST">
+                      <button type="submit" class="delete-btn">
+                        Remove
+                      </button>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+              <% }) %>
+
+            </div>
+          </div>
+
+          <!-- SHORTS -->
+          <div class="tab-panel" id="tab-shorts">
+
+            <% if (!shorts || shorts.length === 0) { %>
+            <p class="empty-text">No shorts uploaded</p>
+            <% } else { %>
+
+            <div class="shorts-grid">
+              <% shorts.forEach(short => { %>
+
+              <div class="short-card-wrapper">
+
+                <!-- SHORT -->
+                <a href="/shorts?shortId=<%= short._id %>" class="short-card">
+                  <!-- <video src="<%= short.video %>" muted preload="metadata"></video> -->
+                  <img src="<%= short.thumbnail %>" />
+                  <div class="short-info">
+                    <div class="short-title"><%= short.title %></div>
+                  </div>
+                </a>
+
+                <!-- THREE DOT MENU -->
+                <% if (currentUser && short.creator.equals(currentUser._id)) { %>
+                <div class="short-menu">
+                  <button class="short-dots" type="button">⋮</button>
+
+                  <div class="short-dropdown">
+                    <form action="/shorts/<%= short._id %>?_method=DELETE#shorts" method="POST">
+                      <button type="submit" class="delete-btn">
+                        Remove
+                      </button>
+                    </form>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+              <% }) %>
+            </div>
+            <% } %>
+          </div>
+
+          <!-- COMMUNITY POSTS -->
+          <div class="tab-panel" id="tab-posts">
+            <% if (posts.length === 0) { %>
+            <p class="empty-text">No community posts yet</p>
+            <% } %>
+
+            <% posts.forEach(post => { %>
+            <div class="community-post">
+
+              <!-- BOOKMARK -->
+              <% if (currentUser) { %> <% const isSaved = currentUser.savedPosts.some(
+             id => id.toString() === post._id.toString()); %>
+              <form action="/users/savedposts/<%= post._id %>?_method=PUT#posts" method="POST" class="bookmark-form">
+                <button type="submit" class="community-bookmark <%= isSaved ? 'active' : '' %>" title="Save post">
+                  <i class="bi <%= isSaved ? 'bi-bookmark-fill' : 'bi-bookmark' %>"></i>
+                </button>
+              </form>
+              <% } else { %>
+              <a href="/login" class="community-bookmark bookmark-guest" title="Save post" data-action="save-post">
+                <i class="bi bi-bookmark"></i>
+              </a>
+              <% } %>
+
+              <!-- REMOVE -->
+              <% if (currentUser && post.creator && post.creator.equals(currentUser._id)) { %>
+              <form action="/posts/<%= post._id %>?_method=DELETE#posts" method="POST" class="remove-post-form">
+                <button type="submit" class="remove-post-btn" onclick="return confirm('Delete this post?')">
+                  Remove
+                </button>
+              </form>
+              <% } %>
+
+              <!-- CONTENT -->
+              <div class="community-content">
+                <p><%= post.content %></p>
+              </div>
+
+              <!-- IMAGE -->
+              <% if (post.image) { %>
+              <div class="community-image">
+                <img src="<%= post.image %>" alt="post image" />
+              </div>
+              <% } %>
+
+            </div>
+            <% }) %>
+          </div>
+
+          <!-- Details -->
+          <div class="tab-panel" id="tab-about">
+            <div class="about-section">
+              <h3>About</h3>
+              <% if (user.description && user.description.trim() !== "") { %>
+              <p class="about-description">
+                <%= user.description %>
+              </p>
+              <% } else { %>
+              <% } %>
+
+              <div class="about-meta">
+                <div><strong>Username:</strong> <%= user.username %></div>
+
+                <div>
+                  <strong>Joined:</strong>
+                  <%= new Date(user.createdAt).toLocaleDateString() %>
+                </div>
+
+                <div>
+                  <strong>Total Videos:</strong> <%= videos.length %>
+                </div>
+
+                <div>
+                  <strong>Community Posts:</strong> <%= posts.length %>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/sidebar.js"></script>
+
+  <script>
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabPanels = document.querySelectorAll(".tab-panel");
+
+    function activateTab(tabId) {
+      tabButtons.forEach(b => b.classList.remove("active"));
+      tabPanels.forEach(p => p.classList.remove("active"));
+
+      const btn = document.querySelector(`[data-tab="${tabId}"]`);
+      const panel = document.getElementById(tabId);
+
+      if (btn && panel) {
+        btn.classList.add("active");
+        panel.classList.add("active");
+      }
+    }
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const tabId = btn.dataset.tab;
+        const hash = btn.dataset.hash;
+        history.replaceState(null, "", `#${hash}`);
+        activateTab(tabId);
+      });
+    });
+
+    const hashMap = {
+      videos: "tab-videos",
+      shorts: "tab-shorts",
+      posts: "tab-posts",
+      about: "tab-about",
+    };
+
+    const hash = window.location.hash.replace("#", "");
+    if (hashMap[hash]) {
+      activateTab(hashMap[hash]);
+    }
+  </script>
+
+  <script>
+    document.addEventListener("click", (e) => {
+      // close all dropdowns
+      document.querySelectorAll(".card-dropdown").forEach(d => {
+        d.classList.remove("show");
+      });
+
+      // toggle clicked one
+      const btn = e.target.closest(".threedots");
+      if (btn) {
+        e.stopPropagation();
+        const dropdown = btn.nextElementSibling;
+        dropdown.classList.toggle("show");
+      }
+    });
+  </script>
+
+  <script>
+    document.addEventListener("click", (e) => {
+
+      // close all short dropdowns
+      document.querySelectorAll(".short-dropdown").forEach(d => {
+        d.classList.remove("show");
+      });
+
+      const btn = e.target.closest(".short-dots");
+      if (btn) {
+        e.stopPropagation();
+        btn.nextElementSibling.classList.toggle("show");
+      }
+    });
+  </script>

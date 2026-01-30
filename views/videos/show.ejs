@@ -1,0 +1,241 @@
+<% layout("/layouts/boilerplate") %>
+
+<div id="videosidebar">
+  <%- include("../includes/sidebar.ejs") %>
+</div>
+
+<div id="videoplaybody">
+  <div id="playvideotab">
+
+    <!-- VIDEO PLAYER -->
+    <div id="playvideo">
+      <video poster="<%=video.thumbnail%>" src="<%= video.video %>" controls autoplay controlsList="nodownload noremoteplayback" disablePictureInPicture style="width: 100%; border-radius: 10px;"></video>
+    </div>
+
+    <!-- VIDEO TITLE -->
+    <div id="playvideoname">
+      <%= video.title %>
+    </div>
+
+    <!-- VIDEO INFO BAR -->
+    <div id="playvideoinfo">
+
+      <!-- CHANNEL INFO -->
+      <div id="playchannel">
+        <div id="playvideoicon" onclick="window.location.href='/users/<%= video.creator._id %>'" style="background-image: url('<%= video.creator.profilePic %>'); cursor: pointer;"></div>
+        <div onclick="window.location.href='/users/<%= video.creator._id %>'" id="playchannelinfo" style="cursor: pointer">
+          <div id="playchannelname">
+            <%= video.creator.username %>
+          </div>
+          <div id="playchannelsubs">
+            subscribe
+          </div>
+        </div>
+
+        <% if (currentUser) { %>
+        <% const isFollowing = currentUser.followings.some(id => id.toString() === video.creator._id.toString());%>
+        <form action="/users/followings/<%= video.creator._id %>?_method=PUT" method="POST">
+          <button style="border:none; background:none; padding:0; margin-left: 25px; cursor:pointer;" type="submit" class="interactbox follow-btn <%= isFollowing ? 'saved' : '' %>">
+            <div id="subs-button" style="margin-left: 0;" class="<%= isFollowing ? 'following' : '' %>">
+              <%= isFollowing ? 'Following' : 'Follow' %>
+            </div>
+          </button>
+        </form>
+        <% } else { %>
+        <div href="/login" class="interactbox follow-guest" data-action="follow" style="margin-left: 25px; padding: 0; cursor: pointer;">
+          <div id="subs-button" style="margin-left: 0;padding: 0 15px;">Follow</div>
+        </div>
+        <% } %>
+      </div>
+
+      <!-- INTERACTIONS -->
+      <div id="playinteraction">
+
+        <!-- repeat -->
+        <div class="interactbox" id="videorepeatBtn" style="cursor: pointer;">
+          <div class="interacticon">
+            <i class="fa-solid fa-arrow-rotate-right"></i>
+          </div>
+        </div>
+
+        <!-- bookmark -->
+        <% if (currentUser) { %>
+        <form action="/users/savedvideos/<%= video._id %>?_method=PUT" method="POST">
+          <button style="border:none; cursor: pointer;" type="submit" class="interactbox save-btn <%= currentUser.savedVideos.includes(video._id) ? 'saved' : '' %>">
+            <div class="interacticon">
+              <i class="bi bi-bookmark"></i>
+            </div>
+            <div class="interactname">
+              <%= currentUser.savedVideos.includes(video._id) ? 'Saved' : 'Save' %>
+            </div>
+          </button>
+        </form>
+        <% } else { %>
+        <div id="saveBtn" class="interactbox save-guest" data-action="save" style="cursor:pointer;">
+          <div class="interacticon">
+            <i class="bi bi-bookmark"></i>
+          </div>
+          <div class="interactname">Save</div>
+        </div>
+        <% } %>
+
+
+        <!-- copy link -->
+        <div class="interactbox" id="copyLinkBtn" style="cursor: pointer;">
+          <div class="interacticon">
+            <i class="bi bi-link-45deg"></i>
+          </div>
+          <div class="interactname">Copylink</div>
+        </div>
+
+
+        <!-- like / dislike -->
+        <div class="interactbox" id="likeBox">
+          <div style="cursor: pointer;" class="interacticon" id="likeBtn">
+            <i class="bi bi-hand-thumbs-up"></i>
+          </div>
+
+          <div class="interactname" id="likeCount">
+            like
+          </div>
+
+          <div class="vl"></div>
+          <div style="cursor: pointer;" class="interacticon" id="dislikeBtn">
+            <i class="bi bi-hand-thumbs-down"></i>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div id="playvideodis">
+      <div id="dis1">
+        Posted on •
+        <%= new Date(video.date).toLocaleDateString() %>
+      </div>
+
+      <div id="dis2">
+        <%= video.description || "No description provided." %>
+      </div>
+
+      <div id="dis3">
+        Category : <%= video.category %>
+      </div>
+    </div>
+
+    <!-- Add COMMENTS -->
+    <div id="comments">
+      <div id="noofcomments">
+        <%= video.comments.length %> Comments
+      </div>
+      <form id="addcomment" action="/videos/<%= video._id %>/comments" method="POST">
+        <div id="addcommenticon">
+          <% if (currentUser) { %>
+          <img src="<%=currentUser.profilePic%>" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+          <% } else { %>
+          <i class="fa-solid fa-user"></i>
+          <% } %>
+        </div>
+
+        <div id="commentline">
+          <div id="commentinput">
+            <input id="commentplace" name="content" type="text" placeholder="Add a comment..." required />
+          </div>
+          <!-- comment buttons -->
+          <div class="comment-actions">
+            <button type="button" class="comment-cancel">Cancel</button>
+            <button type="submit" class="comment-submit">Comment</button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Comments -->
+      <div id="comments-list">
+
+        <% if (video.comments.length === 0) { %>
+        <div class="no-comments">
+          <h4>Be the first to comment</h4>
+        </div>
+        <% } %>
+
+        <% video.comments.forEach(comment => { %>
+        <div class="single-comment">
+          <!-- user -->
+          <div onclick="window.location.href='/users/<%= comment.author._id %>'" class="comment-user-icon" style="background-image: url('<%= comment.author.profilePic %>');"></div>
+          <!-- comment body -->
+          <div class="comment-body">
+            <div class="comment-header">
+              <div class="comment-header-left">
+                <span onclick="window.location.href='/users/<%= comment.author._id %>'" style="cursor:pointer" class="comment-username">
+                  <%= comment.author.username %>
+                </span>
+                <span class="comment-date">
+                  <%= new Date(comment.createdAt).toLocaleDateString() %>
+                </span>
+              </div>
+              <!-- three dots -->
+              <% if (currentUser && comment.author && currentUser._id.toString() === comment.author._id.toString()) { %>
+              <div class="comment-menu">
+                <i class="bi bi-three-dots-vertical"></i>
+                <div class="comment-dropdown">
+                  <form action="/videos/<%= video._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="comment-delete">
+                      Remove
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <% } %>
+            </div>
+            <div class="comment-text">
+              <%= comment.content %>
+            </div>
+            <!-- like / dislike -->
+            <div class="comment-reactions">
+              <i class="bi bi-hand-thumbs-up comment-like"></i>
+              <i class="bi bi-hand-thumbs-down comment-dislike"></i>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- EXTRA VIDEOS -->
+  <div id="extravideos">
+    <h3 id="extravideosheading">
+      <hr />
+      <p id="extravideosheadingtext">Similar Videos</p>
+    </h3>
+    <% for (let similarVideo of videos) { %>
+    <div class="extra-videobox">
+      <div class="extra-thumbnail" onclick="window.location.href='/video/<%= similarVideo._id %>'" style="background-image: url('<%= similarVideo.thumbnail %>')"></div>
+
+      <div class="extra-info">
+        <div class="extra-title">
+          <%= similarVideo.title %>
+        </div>
+
+        <div class="extra-date">
+          Posted on <%= new Date(similarVideo.date).toLocaleDateString() %>
+        </div>
+
+        <div class="extra-channel" onclick="window.location.href='/users/<%= similarVideo.creator._id %>'">
+          <div class="extra-channel-icon" style="background-image: url('<%= similarVideo.creator.profilePic %>')"></div>
+
+          <div class="extra-channel-name">
+            <%= similarVideo.creator.username %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<script src="/js/videosidebar.js"></script>
+<script src="/js/show.js"></script>

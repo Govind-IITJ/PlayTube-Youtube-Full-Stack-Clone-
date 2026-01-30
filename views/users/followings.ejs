@@ -1,0 +1,60 @@
+<% layout("/layouts/boilerplate") %>
+
+<div id="body">
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <%- include("../includes/sidebar.ejs") %>
+  </div>
+
+  <% if (followings.length === 0) { %>
+  <div id="search-nofound">
+    <div id="search-nofound-image"></div>
+    <div id="search-nofound-1">You aren't following anyone</div>
+    <div id="search-nofound-2">
+      <p>Channels you follow will appear here</p>
+    </div>
+  </div>
+  <% } %>
+
+  <div id="search-videosearchcontent">
+
+    <h3 style="margin-bottom: 15px;
+    font-size: 22px;
+    margin-left: 5px;">Followings</h3>
+
+    <% followings.forEach(user => { %>
+    <div class="search-videosearchbox channel-card">
+
+      <!-- Clickable channel area -->
+      <div class="channel-main" onclick="window.location.href='/users/<%= user._id %>'">
+        <div class="channel-avatar" style="background-image: url('<%= user.profilePic %>')"></div>
+
+        <div class="channel-info">
+          <div class="channel-name"><%= user.username %></div>
+          <div class="channel-description">
+            <%= user.description || "No description available" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Follow / Unfollow -->
+      <% if (currentUser && !currentUser._id.equals(user._id)) { %>
+      <form action="/users/followings/<%= user._id %>?_method=PUT" method="POST">
+        <button type="submit" class="follow-btn <%= currentUser.followings.includes(user._id) ? 'following' : '' %>">
+          <%= currentUser.followings.includes(user._id)
+              ? "Unfollow"
+              : "Follow" %>
+        </button>
+      </form>
+      <% } %>
+
+    </div>
+    <% }) %>
+
+  </div>
+
+</div>
+
+
+<script src="/js/sidebar.js"></script>

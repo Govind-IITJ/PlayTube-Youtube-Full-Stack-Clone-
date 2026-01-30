@@ -1,0 +1,73 @@
+.community-upload-page,
+.community-feed {
+  max-width: 700px;
+  margin: 90px auto 40px;
+  padding: 0 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.community-upload-page h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.community-form {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.community-form textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+
+.community-form input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.community-form textarea:focus,
+.community-form input:focus {
+  outline: none;
+  border-color: #065fd4;
+}
+
+
+
+.btn-primary {
+  background-color: #065fd4;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: #054cb3;
+}
+
+@media (max-width: 600px) {
+  .community-upload-page,
+  .community-feed {
+    margin-top: 70px;
+  }
+
+  .community-form textarea {
+    min-height: 80px;
+  }
+}

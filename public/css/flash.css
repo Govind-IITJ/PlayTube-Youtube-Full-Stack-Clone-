@@ -1,0 +1,72 @@
+.flash {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 280px;
+  max-width: 520px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  z-index: 9999;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  animation: slideDown 0.35s ease-out;
+}
+
+.flash-text {
+  flex: 1;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.flash-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.flash-close:hover {
+  opacity: 1;
+}
+
+
+.flash-success {
+  background: #e8f3ff;
+  color: #0b57d0;
+  border-left: 6px solid #0b57d0;
+}
+
+
+.flash-error {
+  background: #fdecec;
+  color: #b42318;
+  border-left: 6px solid #b42318;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -15px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 600px) {
+  .flash {
+    top: 70px;
+    width: 90%;
+    font-size: 14px;
+  }
+}
+

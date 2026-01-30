@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="/css/style.css" /> -->
+  <link rel="stylesheet" href="/css/navbar.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/show.css" />
+  <link rel="stylesheet" href="/css/sidebar.css" />
+  <link rel="stylesheet" href="/css/search.css" />
+  <link rel="stylesheet" href="/css/comment.css" />
+  <link rel="stylesheet" href="/css/shorts.css" />
+  <link rel="stylesheet" href="/css/uploadvideo.css" />
+  <link rel="stylesheet" href="/css/uploadshorts.css" />
+  <link rel="stylesheet" href="/css/uploadpost.css" />
+  <link rel="stylesheet" href="/css/profile.css" />
+  <link rel="stylesheet" href="/css/followings.css" />
+  <link rel="stylesheet" href="/css/savedPosts.css" />
+  <link rel="stylesheet" href="/css/flash.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+</head>
+
+<body class="page-layout">
+  <h1 style="width: 100%; height:50px; color: white; z-index: 1000; position: fixed; top: 0; background-color: white;"></h1>
+  <%- include("../includes/navbar.ejs") %>
+  <main class="page-content">
+    <div class="container">
+      <div id="login-popup" class="popup-overlay">
+        <div class="popup-box">
+          <p id="popup-message"></p>
+          <div class="popup-actions">
+            <a id="popup-login-btn" href="/login" class="popup-btn">Login</a>
+            <button id="popup-close" class="popup-btn secondary">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <%- include("../includes/flash.ejs") %> <%- body %>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script>
+    window.IS_LOGGED_IN = <%= currentUser ? "true" : "false" %>;
+  </script>
+  <script src="/js/popup.js"></script>
+  <script src="/js/navbar.js"></script>
+  <script src="/js/validate.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+.upload-page {
+  padding-bottom: 100px !important;
+}
+
+.upload-page h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #cfcfcf;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #065fd4;
+  box-shadow: 0 0 0 2px rgba(6, 95, 212, 0.15);
+}
+
+.btn-primary {
+  margin-top: 8px;
+  align-self: flex-end;
+  padding: 10px 22px;
+  border-radius: 20px;
+  border: none;
+  background-color: #065fd4;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+  background-color: #054cb3;
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+
+@media (max-width: 600px) {
+  .upload-page {
+    margin: 80px 20px 30px;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .upload-page {
+    padding: 18px 16px;
+    margin: 70px 12px 25px;
+  }
+
+  .upload-page h2 {
+    font-size: 20px;
+  }
+
+  .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+}
+

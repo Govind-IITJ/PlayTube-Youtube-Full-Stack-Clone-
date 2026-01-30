@@ -1,0 +1,308 @@
+#comments {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+#noofcomments {
+  font-size: 1.4vw;
+  font-weight: 600;
+}
+
+#addcomment {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 36px;
+  margin-top: 20px;
+}
+
+#addcommenticon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 20%;
+  background-color: rgb(0, 0, 0);
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+}
+
+.no-comments {
+    color: #585858;
+}
+
+#commentline {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  margin-left: 10px;
+  justify-content: center;
+}
+
+#commentinput {
+  border-width: 0px;
+  border-bottom-width: 2px;
+  border-style: solid;
+  border-color: rgb(189, 189, 189);
+  font-size: 17px;
+}
+
+#commentplace {
+  border: none;
+  width: 100%;
+}
+
+#commentplace:focus {
+  outline: none;
+}
+
+.comment-actions {
+  display: none;
+  justify-content: flex-end;
+  margin-top: 8px;
+  gap: 10px;
+}
+
+#commentline:focus-within .comment-actions {
+  display: flex;
+}
+
+.comment-cancel {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  color: #606060;
+  cursor: pointer;
+}
+
+.comment-submit {
+  background-color: #065fd4;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#commentplace:placeholder-shown ~ .comment-actions .comment-submit {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+}
+
+#comments-list {
+  width: 100%;
+  margin-top: 35px;
+  margin-left: 8px;
+}
+
+.single-comment {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.comment-user-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background-color: #ddd; 
+  cursor: pointer;
+}
+
+
+.comment-body {
+  flex: 1;
+}
+
+.comment-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.comment-username {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.comment-date {
+  font-size: 12px;
+  color: gray;
+}
+
+.comment-text {
+  margin-top: 4px;
+  font-size: 16px;
+}
+
+.comment-actions-row {
+  margin-top: 6px;
+  display: flex;
+  gap: 14px;
+  font-size: 14px;
+  color: #606060;
+  cursor: pointer;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.comment-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 20px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 6px 0;
+  z-index: 10;
+}
+
+.comment-delete {
+  background: none;
+  border: none;
+  padding: 6px 14px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.comment-delete:hover {
+  background-color: #f2f2f2;
+}
+
+.comment-reactions {
+  display: flex;
+  gap: 16px;
+  margin-top: 6px;
+  font-size: 16px;
+  color: #606060;
+  cursor: pointer;
+}
+
+.comment-like.active {
+  color: #065fd4; 
+}
+
+.comment-dislike.active {
+  color: #065fd4;
+}
+
+
+@media (max-width: 1000px) {
+  #noofcomments {
+    font-size: 2.2vw;
+  }
+
+  .comment-username {
+    font-size: 15px;
+  }
+
+  .comment-text {
+    font-size: 15px;
+  }
+
+  .comment-user-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+}
+
+
+@media (max-width: 700px) {
+  #noofcomments {
+    font-size: 16px;
+  }
+
+  #addcomment {
+    height: auto;
+    align-items: flex-start;
+  }
+
+  .single-comment {
+    gap: 10px;
+  }
+
+  .comment-text {
+    font-size: 16px;
+  }
+
+  .comment-username {
+    font-size: 14px;
+  }
+
+  .comment-date {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 500px) {
+  #comments {
+    margin-top: 15px;
+  }
+
+  #comments-list {
+    margin-left: 0;
+    margin-top: 25px;
+  }
+
+  .single-comment {
+    gap: 8px;
+  }
+
+  .comment-user-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  #commentinput {
+    font-size: 15px;
+  }
+
+  .comment-actions {
+    gap: 8px;
+  }
+
+  .comment-submit {
+    padding: 5px 12px;
+    font-size: 13px;
+  }
+
+  .comment-cancel {
+    font-size: 13px;
+  }
+
+  .comment-reactions {
+    font-size: 14px;
+    gap: 12px;
+  }
+}
+

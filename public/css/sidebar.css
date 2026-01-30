@@ -1,0 +1,173 @@
+#body {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+  margin-top: 75px;
+}
+
+#videosidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 230px;
+  height: calc(100vh - 60px);
+  background: white;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 2000;
+  transition: transform 0.3s ease;
+  border-right: 6px solid rgb(178, 178, 178);
+  display: none;
+  padding-bottom: 100px;
+}
+
+#videosidebar {
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#videosidebar::-webkit-scrollbar {
+  display: none;
+}
+
+#sidebar {
+  min-width: 230px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 2000;
+  padding-bottom: 100px;
+}
+
+#sidebar a,
+#videosidebar a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidetab {
+  height: 40px;
+  width: 230px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sidebaricon {
+  margin-left: 15px;
+  font-size: 20px;
+}
+
+.sidebarname {
+  margin-left: 30px;
+  font-size: 17px;
+  font-style: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.sidetab:hover {
+  background-color: #f4f4f4;
+  border-radius: 10px;
+}
+
+#shortsicon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+}
+
+#subicon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+}
+
+#you,
+#Subscriptions {
+  height: 40px;
+  width: 100%;
+  font-size: 18px;
+  font-style: bold;
+  font-weight: 550;
+  padding-left: 15px;
+  font-family: arial;
+}
+
+#playlisticon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 20px;
+  width: 20px;
+}
+
+#videoicon {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 16px;
+  width: 24px;
+}
+
+#videoname {
+  margin-left: 26px;
+}
+
+#yourcoursesname {
+  margin-left: 25px;
+}
+
+.photo {
+  margin-left: 15px;
+  font-size: 20px;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-weight: 400;
+}
+
+#studioicon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+}
+
+#kidsicon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+}
+
+#musicicon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+}
+
+#display {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 230px);
+}
+
+@media (max-width: 1000px) {
+  #sidebar,
+  #videosidebar {
+    display: none;
+  }
+}

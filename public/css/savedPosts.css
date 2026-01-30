@@ -1,0 +1,114 @@
+#savedPosts {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 10px 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  height:90vh;
+}
+
+.saved-post-card {
+  background: #f8f8f8;
+  width: 100%;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.saved-post-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.saved-post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.post-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.post-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-username {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f0f0f;
+}
+
+.post-date {
+  font-size: 12px;
+  color: #707070;
+}
+
+.remove-post-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #cc0000;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+
+.remove-post-btn:hover {
+  text-decoration: underline;
+}
+
+.saved-post-content {
+  font-size: 17px;
+  line-height: 1.55;
+  color: #1f1f1f;
+  margin: 20px 0;
+  text-align: justify;
+}
+
+.saved-post-image {
+  margin-top: 10px;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+}
+
+
+.empty-text {
+  font-size: 15px;
+  color: #888;
+  text-align: center;
+  margin-top: 25px;
+}
+
+@media (max-width: 600px) {
+  .saved-post-card {
+    padding: 12px;
+    border-radius: 12px;
+  }
+  .post-avatar {
+    width: 34px;
+    height: 34px;
+  }
+}

@@ -1,0 +1,95 @@
+<% layout("/layouts/boilerplate") %>
+
+<div id="body">
+  <div id="sidebar"><%- include("../includes/sidebar.ejs") %></div>
+
+  <div id="shorts-display">
+
+    <% videos.forEach(video => { %>
+
+    <div class="shortsbox">
+
+      <div class="shortsvideo">
+
+        <video poster="<%=video.thumbnail%>" src="<%= video.video %>"  style="background-color: rgb(0, 0, 0);" class="shorts-video-player" autoplay loop playsinline preload="metadata"></video>
+
+        <div class="shorts-vid">
+
+          <a href="/users/<%= video.creator._id %>" class="shorts-logo" style="background-image:url('<%= video.creator.profilePic %>'); background-size: cover;;"></a>
+
+          <a href="/users/<%= video.creator._id %>" class="shorts-name">
+            @<%= video.creator.username %>
+          </a>
+
+          <%const isFollowing = currentUser && video.creator && Array.isArray(currentUser.followings) && currentUser.followings.some(
+            id => id.toString() === video.creator._id.toString());%>
+
+          <% if (currentUser && video.creator) { %>
+          <form action="/users/followings/<%= video.creator._id %>?_method=PUT" method="POST">
+            <button type="submit" class="shorts-subs <%= isFollowing ? 'following' : '' %>" style="border:none; padding:0; cursor:pointer;">
+              <div class="follow-text">
+                <%= isFollowing ? "Following" : "Follow" %>
+              </div>
+            </button>
+          </form>
+          <% } else { %>
+          <a href="/login" class="shorts-subs follow-guest" style="cursor:pointer;">
+            <div>Follow</div>
+          </a>
+          <% } %>
+
+        </div>
+
+        <div class="video-dis" id="video-name">
+          <%= video.title %>
+        </div>
+
+      </div>
+
+      <div class="shorts-int">
+        <div class="shorts-icon shorts-options-btn" style="cursor: pointer;">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </div>
+        <div class="shorts-options-menu">
+          <div class="option" data-action="play">▶ Play / Pause</div>
+          <div class="option" data-action="mute">🔇 Mute / Unmute</div>
+          <div class="option" data-action="restart">🔁 Restart</div>
+        </div>
+        <div class="shorts-int-box">
+          <div class="shorts-icon-box like-box">
+            <div class="shorts-icon like-icon">
+              <i class="fa-solid fa-thumbs-up"></i>
+            </div>
+            <div class="like-text">Like</div>
+          </div>
+          <div class="shorts-icon-box dislike-box">
+            <div class="shorts-icon dislike-icon">
+              <i class="fa-solid fa-thumbs-down"></i>
+            </div>
+            <div class="dislike-text">Dislike</div>
+          </div>
+          <div class="shorts-icon-box reload-box">
+            <div class="shorts-icon reload-icon" title="Replay">
+              <i class="fa-solid fa-rotate-right"></i>
+            </div>
+            <div class="reload-text">Replay</div>
+          </div>
+          <div class="shorts-icon-box copy-box" data-shortid="<%= video._id %>">
+            <div class="shorts-icon copy-icon">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <div class="copy-text">Copylink</div>
+          </div>
+          <div class="shorts-icon1" onclick="window.location.href='/users/6977676d00d677cd5929e69c'" style="background-image: url('/images/shorts.png'); cursor: pointer;"></div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</div>
+
+<!-- <script>
+  window.IS_LOGGED_IN = <%= currentUser ? "true" : "false" %>;
+</script> -->
+<script src="/js/shorts.js"></script>
+<script src="/js/sidebar.js"></script>

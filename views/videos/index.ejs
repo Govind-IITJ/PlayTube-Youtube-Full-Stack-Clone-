@@ -1,0 +1,56 @@
+<% layout("/layouts/boilerplate") %>
+
+<div id="body">
+  <div id="sidebar">
+    <%- include("../includes/sidebar.ejs") %>
+  </div>
+
+  <div id="display">
+    <!-- option tab -->
+    <div class="opttab" id="optiontab">
+      <% categories.forEach(cat => { %>
+      <a href="/videos?category=<%= cat %>">
+        <div class="opt <%= selectedCategory === cat ? 'active' : '' %>">
+          <%= cat %>
+        </div>
+      </a>
+      <% }) %>
+    </div>
+    <% if (!videos || videos.length === 0) { %>
+    <div class="no-videos">
+      😕 No videos available in this category yet.
+    </div>
+    <% } %>
+
+    <!-- video content -->
+    <div id="videocontent">
+      <% videos.forEach((video, index) => { %>
+      <div class="videobox" id="video-<%= index %>" style="cursor: pointer;">
+        <!-- Thumbnail -->
+        <div class="thumbnail" onclick="window.location.href='/video/<%= video._id %>'" style="background-image: url('<%= video.thumbnail %>');"></div>
+        <!-- Video info -->
+        <div class="videoinfo">
+          <!-- Channel icon -->
+          <div class="videoicon" onclick="window.location.href='/users/<%= video.creator._id %>'" style="background-image: url('<%= video.creator.profilePic %>');"></div>
+          <!-- Text -->
+          <div class="videotext" onclick="window.location.href='/video/<%= video._id %>'">
+            <div class="videoname" onclick="window.location.href='/video/<%= video._id %>'">
+              <%= video.title %>
+            </div>
+            <div class="channelname" onclick="window.location.href='/users/<%= video.creator._id %>'">
+              <%= video.creator.username %>
+            </div>
+            <div class="videoview">
+              Posted on • <%= new Date(video.date).toLocaleDateString() %>
+            </div>
+          </div>
+          <!-- Three dots -->
+          <div tabindex="0" class="threedots">⋮</div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+
+<script src="/js/sidebar.js"></script>
