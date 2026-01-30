@@ -2,6 +2,11 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/user");
 
+const DEFAULT_PROFILE_PIC =
+  "https://res.cloudinary.com/dd8o5muke/image/upload/v1769186764/youtube_DEV/pnnwxup58cu2chnrxhsn.jpg";
+const DEFAULT_BG_IMAGE =
+  "https://res.cloudinary.com/dd8o5muke/image/upload/v1769186771/youtube_DEV/mtsfkhizzqwi1iaeabwv.png";
+
 passport.use(
   new GoogleStrategy(
     {
@@ -15,14 +20,12 @@ passport.use(
         let user = await User.findOne({ email });
         if (!user) {
           user = await User.create({
-            username: profile.displayName
-              .replace(/\s+/g, "")
-              .toLowerCase(), 
+            username: profile.displayName.replace(/\s+/g, "").toLowerCase(),
             email: email,
-            passkey: null, 
+            passkey: null,
             description: "",
-            profilePic: profile.photos?.[0]?.value || "/images/default-user.png",
-            backgroundImage: "/images/default-banner.png",
+            profilePic: profile.photos?.[0]?.value || DEFAULT_PROFILE_PIC,
+            backgroundImage: DEFAULT_BG_IMAGE,
             videos: [],
             communityPosts: [],
             watchHistory: [],
@@ -35,8 +38,8 @@ passport.use(
       } catch (err) {
         return done(err, null);
       }
-    }
-  )
+    },
+  ),
 );
 
 // Store user id in session

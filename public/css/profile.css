@@ -405,6 +405,7 @@
   background-color: #ffffff;
   border-radius: 12px;
   padding: 0 !important;
+  padding-top: 10px !important;
 }
 
 
@@ -521,6 +522,7 @@
   .user-stats {
     margin-top: 5px;
     font-size: 12px;
+    gap:12px;
   }
 }
 
