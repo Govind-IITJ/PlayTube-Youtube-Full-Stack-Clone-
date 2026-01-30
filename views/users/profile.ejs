@@ -168,9 +168,7 @@
             <div class="about-section">
               <h3>About</h3>
               <% if (user.description && user.description.trim() !== "") { %>
-              <p class="about-description">
-                <%= user.description.replace(/^\s+/, "") %>
-              </p>
+              <p class="about-description"><%= user.description.replace(/^\s+/, "") %></p>
               <% } else { %>
               <% } %>
 
