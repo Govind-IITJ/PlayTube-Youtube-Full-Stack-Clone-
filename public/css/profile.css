@@ -405,7 +405,6 @@
   background-color: #ffffff;
   border-radius: 12px;
   padding: 0 !important;
-  padding-top: 10px !important;
 }
 
 
@@ -500,7 +499,7 @@
     grid-template-columns: 1fr;
   }
   .tab-content {
-    padding-top: 0;
+    padding-top: 15px;
     padding-left: 10px;
   }
 }
@@ -522,7 +521,7 @@
   .user-stats {
     margin-top: 5px;
     font-size: 12px;
-    gap:12px;
+    gap:9px;
   }
 }
 
